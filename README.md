@@ -13,3 +13,5 @@ Policy:
 - Majors require approval on each repo's Dependency Dashboard issue.
 - `minimumReleaseAge: 3 days` — new releases must age before Renovate proposes them (defense against freshly-published malicious versions, e.g. the 2026-10 Shai-Hulud/Tensorlake worm). Security fixes bypass the delay and schedule.
 - Monthly lockfile maintenance. No automerge.
+
+- Renovate's npm is held below 12 (`constraints.npm: "<12"`): npm 12 refuses registry tarballs of packages with `bundleDependencies` (`EALLOWREMOTE`, npm/cli#9800), e.g. Tailwind 4's `@tailwindcss/oxide-wasm32-wasi`, which breaks lockfile updates. Matches CI/local npm. Remove once a fixed npm 12 ships.
